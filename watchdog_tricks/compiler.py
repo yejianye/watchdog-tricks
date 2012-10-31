@@ -7,8 +7,8 @@ from watchdog_tricks import utils
 
 class AutoCompileTrick(Trick):
     def __init__(self, src_dir, dest_dir, **kwargs):
-        self.src_dir = src_dir
-        self.dest_dir = dest_dir
+        self.src_dir = os.path.abspath(src_dir)
+        self.dest_dir = os.path.abspath(dest_dir)
         self.compiler = kwargs.pop('compiler')
         self.src_ext = kwargs.pop('src_ext')
         self.dest_ext = kwargs.pop('dest_ext')

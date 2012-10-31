@@ -10,7 +10,7 @@ setuptools.setup(
     url="https://github.com/yejianye/watchdog-tricks",
 
     description="Common tricks for watchdog (Python file system monitoring tool), including watcher for LessCss, CoffeeScript etc",
-    long_description=open("README.txt").read(),
+    long_description=open("README.md").read(),
     keywords=["watchdog","watcher","tricks"],
     classifiers=[
             "Environment :: Console",
@@ -28,7 +28,7 @@ setuptools.setup(
         ],
     entry_points={
         'console_scripts': [
-            'lesswatcher = watchdog_tricks.less:main',
+            'lesswatcher = watchdog_tricks.lesswatcher:main',
         ]
     },
     install_requires=['watchdog'],
