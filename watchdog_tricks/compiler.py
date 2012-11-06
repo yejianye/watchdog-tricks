@@ -71,3 +71,23 @@ class CoffeeScriptTrick(AutoCompileTrick):
             compile_command = '$compiler -cp $opts $src > $dst',
             **kwargs
         )
+
+class CtagsTrick(Trick):
+    def __init__(self, filetypes, ctags='ctags', **kwargs):
+        kwargs.setdefault('patterns', ['*.%s' % ext for ext in filetypes])
+        super(CtagsTrick, self).__init__(**kwargs)
+        self.ctags = ctags
+        self.filetypes = filetypes
+
+    @utils.trace_event
+    def on_any_event(self, event):
+        src_dir = os.path.dirname(event.src_path)
+        self.rebuild_tags(src_dir)
+        if hasattr(event, 'dest_path'):
+            dest_dir = os.path.dirname(event.src_path)
+            if dest_dir != src_dir:
+                self.rebuild_tags(dest_dir)
+
+    def rebuild_tags(self, fdir):
+        utils.build_tags(fdir, self.filetypes, ctags=self.ctags, recursive=False)
+
