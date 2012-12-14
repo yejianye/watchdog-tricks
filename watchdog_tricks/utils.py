@@ -1,3 +1,4 @@
+import sys
 import os
 import subprocess
 from glob import glob
@@ -14,7 +15,9 @@ def trace_event(func):
     return _traced_func
 
 def exec_cmd(cmd, echo=True):
-    if echo: print 'Execute command:', cmd
+    if echo: 
+        sys.stdout.write('Execute command: %s\n' % cmd)
+        sys.stdout.flush()
     process = subprocess.Popen(cmd, shell=True)
     process.wait()
 
