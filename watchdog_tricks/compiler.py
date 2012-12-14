@@ -54,20 +54,20 @@ class AutoCompileTrick(Trick):
 
 class LessTrick(AutoCompileTrick):
     def __init__(self, src_dir, dest_dir, **kwargs):
+        kwargs.setdefault('compiler', 'lessc')
         super(LessTrick, self).__init__(src_dir, dest_dir,
             src_ext = 'less',
             dest_ext = 'css',
-            compiler = 'lessc',
             compile_command = '$compiler $src > $dst',
             **kwargs
         )
 
 class CoffeeScriptTrick(AutoCompileTrick):
     def __init__(self, src_dir, dest_dir, **kwargs):
+        kwargs.setdefault('compiler', 'coffee')
         super(CoffeeScriptTrick, self).__init__(src_dir, dest_dir,
             src_ext = 'coffee',
             dest_ext = 'js',
-            compiler = 'coffee',
             compile_command = '$compiler -cp $opts $src > $dst',
             **kwargs
         )
