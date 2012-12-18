@@ -73,11 +73,13 @@ class CoffeeScriptTrick(AutoCompileTrick):
         )
 
 class CtagsTrick(Trick):
-    def __init__(self, filetypes, ctags='ctags', **kwargs):
+    def __init__(self, filetypes, ctags='ctags', rebuild=False, **kwargs):
         kwargs.setdefault('patterns', ['*.%s' % ext for ext in filetypes])
         super(CtagsTrick, self).__init__(**kwargs)
         self.ctags = ctags
         self.filetypes = filetypes
+        if rebuild:
+            self.rebuild_all()
 
     @utils.trace_event
     def on_any_event(self, event):
@@ -91,3 +93,5 @@ class CtagsTrick(Trick):
     def rebuild_tags(self, fdir):
         utils.build_tags(fdir, self.filetypes, ctags=self.ctags, recursive=False)
 
+    def rebuild_all(self):
+        utils.build_tags('.', self.filetypes, ctags=self.ctags, recursive=True)

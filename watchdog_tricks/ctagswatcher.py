@@ -10,10 +10,7 @@ def main():
     @arg('--ctags', default='ctags', help='Path to ctags program.(default: ctags)')
     def _watcher(args):
         from watchdog.observers import Observer 
-        print args.filetypes
-        if args.rebuild:
-            utils.build_tags('.', args.filetypes, args.ctags, recursive=True) 
-        handler = CtagsTrick(filetypes=args.filetypes, ctags=args.ctags)
+        handler = CtagsTrick(filetypes=args.filetypes, ctags=args.ctags, rebuild=args.rebuild)
         observer = Observer(timeout=1.0)
         observe_with(observer, handler, ['.'], True) 
     dispatch_command(_watcher)
