@@ -69,7 +69,7 @@ watchdog_tricks.compiler.AutoCompileTrick:
 - compiler: Path toe the compiler
 - opts: Command-line options for the compiler
 
-Here's an example configuration file to auto recompile markdown files to html for example.com
+An example configuration file to auto recompile markdown files to html for example.com
     
     tricks:
     - watchdog_tricks.compiler.AutoCompileTrick:
@@ -80,6 +80,17 @@ Here's an example configuration file to auto recompile markdown files to html fo
         compiler: 'markdown'
         opts: '-b http://example.com'
         compile_command: '$compiler $opts < $src > $dst'
+
+watchdog_tricks.compiler.CtagsTrick:
+- filetypes: file types to be monitored 
+- rebuild: whether rebuilding all tags on startup
+
+An example configuration file to auto re-generate tag files for python and coffeescript source files
+
+    tricks:
+    - watchdog_tricks.compiler.CtagsTrick:
+        filetypes: ['py', 'coffee']
+        rebuild: true
 
 Installation
 ------------

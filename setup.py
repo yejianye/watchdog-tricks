@@ -29,6 +29,7 @@ setuptools.setup(
     entry_points={
         'console_scripts': [
             'lesswatcher = watchdog_tricks.lesswatcher:main',
+            'ctagswatcher = watchdog_tricks.ctagswatcher:main',
         ]
     },
     install_requires=['watchdog'],
