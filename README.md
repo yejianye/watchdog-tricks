@@ -8,7 +8,7 @@ Tricks could be running in standalone mode or combined via a configuration file.
 - LessTrick: Auto recompiling LessCSS to CSS 
 - CoffeeScriptTrick: Auto recompiling CoffeeScript to Javascript 
 - AutoCompileTrick: A generic trick to auto recompiling source code 
-
+- ServerRestartTrick: Restart a daemon process on source code changes 
 
 Standalone watcher - lesswatcher
 --------------------------------
@@ -91,6 +91,16 @@ An example configuration file to auto re-generate tag files for python and coffe
     - watchdog_tricks.compiler.CtagsTrick:
         filetypes: ['py', 'coffee']
         rebuild: true
+
+watchdog_tricks.batch.ServerRestartTrick:
+- restart_command: the command to restart the server
+
+An example to restart gunicorn web servers on python source code changes
+
+    tricks:
+    - watchdog_tricks.batch.ServerRestartTrick:
+        patterns: ['*.py']
+        restart_command: sudo kill -HUP /srv/logs/gunicorn.pid
 
 Installation
 ------------
