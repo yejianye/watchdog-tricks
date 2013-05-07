@@ -11,9 +11,9 @@ class BatchTrick(Trick):
     in the text editor or more commonly when the user does a git pull.
     """
     def __init__(self, *args, **kwargs):
+        self.timeout = kwargs.pop('time_interval', 0.2)
         super(BatchTrick, self).__init__(*args, **kwargs)
         self.event_queue = Queue.Queue() 
-        self.timeout = 0.5
         self.timer_thread = Thread(target=self.timer_loop)
         self.timer_thread.daemon = True
         self.timer_thread.start()
