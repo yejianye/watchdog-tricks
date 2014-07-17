@@ -14,7 +14,7 @@ class AutoCompileTrick(Trick):
         self.dest_ext = kwargs.pop('dest_ext')
         self.compile_command = kwargs.pop('compile_command')
         self.compile_opts = kwargs.pop('compile_opts', '')
-        kwargs.setdefault('patterns', ['*.' + self.src_ext])
+        kwargs.setdefault('patterns', [os.path.join('*', self.src_dir, '*.' + self.src_ext)])
         super(AutoCompileTrick, self).__init__(**kwargs)
 
     @utils.trace_event
